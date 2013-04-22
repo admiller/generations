@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="TreeActivity"></activity>
+        <activity android:name="PersonActivity"></activity>
     </application>
 
 </manifest>

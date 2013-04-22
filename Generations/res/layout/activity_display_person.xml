@@ -3,6 +3,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/personBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:onClick="goBack"
+            android:text="Back" />
+
+        <EditText
+            android:id="@+id/hairColorTextField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/personBackButton"
+            android:layout_marginTop="25dp"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/eyeColorTextField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/hairColorTextField"
+            android:ems="10" />
+
+        <CheckBox
+            android:id="@+id/widowsPeakBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/eyeColorTextField"
+            android:text="Widows Peak" />
+
+        <CheckBox
+            android:id="@+id/earlobesBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/widowsPeakBox"
+            android:text="Connecting Earlobes" />
+
+        <CheckBox
+            android:id="@+id/cleftChinBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/earlobesBox"
+            android:text="Cleft Chin" />
+
+        <TextView
+            android:id="@+id/HairColorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/hairColorTextField"
+            android:layout_alignParentLeft="true"
+            android:text="Hair Color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/eyeColorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/eyeColorTextField"
+            android:layout_alignParentLeft="true"
+            android:text="Eye Color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/personSaveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:onClick="savePerson"
+            android:text="Save Person" />
+
+        <EditText
+            android:id="@+id/personName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/hairColorTextField"
+            android:layout_alignParentRight="true"
+            android:ems="10" />
+
+    </RelativeLayout>
 
 </LinearLayout>

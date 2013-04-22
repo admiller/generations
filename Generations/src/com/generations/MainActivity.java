@@ -18,12 +18,35 @@ public class MainActivity extends Activity {
 		//TODO Kriti: Insert SQL Loading code here that will load previously made entries in the tree
 		// Make sure that you set the User and all of their family upon load
 		// for now we will just use the following lines
-		Person john = new Person("John", true, null, null);
-		Person mom = new Person("Jessica", false, null, null);
-		Person dad = new Person("Mike", true, null, null);
-		john.setParent(1, mom);
-		john.setParent(2, dad);
-		setUser(user);
+		Person mainUser = new Person("User", true, null, null);
+		Person mom = new Person("Parent 1", false, null, null);
+		Person dad = new Person("Parent 2", true, null, null);
+		Person gp1 = new Person("GParent 1", true, null, null);
+		Person gp2 = new Person("GParent 2", false, null, null);
+		Person gp3 = new Person("GParent 3", true, null, null);
+		Person gp4 = new Person("GParent 4", false, null, null);
+		mainUser.setParent(1, mom);
+		mainUser.setParent(2, dad);
+		mom.setParent(1, gp1);
+		mom.setParent(2, gp2);
+		dad.setParent(1, gp3);
+		dad.setParent(2, gp4);
+		createTraits(mainUser);
+		createTraits(mom);
+		createTraits(dad);
+		createTraits(gp1);
+		createTraits(gp2);
+		createTraits(gp3);
+		createTraits(gp4);
+		setUser(mainUser);
+	}
+	
+	public static void createTraits(Person person) {
+		person.addTrait(new Trait("Hair Color", "Brown"));
+		person.addTrait(new Trait("Eye Color", "Blue"));
+		person.addTrait(new Trait("Widows Peak", "yes"));
+		person.addTrait(new Trait("Connected Earlobes", "no"));
+		person.addTrait(new Trait("Cleft Chin", "yes"));
 	}
 	
 	/**
@@ -44,7 +67,7 @@ public class MainActivity extends Activity {
 	
 	public void connectToUser(View view) {
 		//TODO Adam: Put Code to connect to other user in here
-		//TODO Everyone: 
+		//TODO Everyone - FYI 
 		/* If you need to start a new activity (called ExampleActivity here)
 		 * then insert the following code:
 		 * 

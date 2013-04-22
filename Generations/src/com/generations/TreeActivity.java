@@ -2,16 +2,38 @@ package com.generations;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 public class TreeActivity extends Activity {
+	
+	private static Person currentPerson;
 
 	//TODO Austin : Insert code to display the tree
-	
+	public void buildTree()  {
+		Person user = MainActivity.getUser();
+		Button userButton = (Button)findViewById(R.id.userButton);
+		Button p1Button = (Button)findViewById(R.id.parent1Button);
+		Button p2Button = (Button)findViewById(R.id.parent2Button);
+		Button gp1Button = (Button)findViewById(R.id.gparent1Button);
+		Button gp2Button = (Button)findViewById(R.id.gparent2Button);
+		Button gp3Button = (Button)findViewById(R.id.gparent3Button);
+		Button gp4Button = (Button)findViewById(R.id.gparent4Button);
+		userButton.setText(user.getName());
+		p1Button.setText(user.getParent(1).getName());
+		p2Button.setText(user.getParent(2).getName());
+		gp1Button.setText(user.getParent(1).getParent(1).getName());
+		gp2Button.setText(user.getParent(1).getParent(2).getName());
+		gp3Button.setText(user.getParent(2).getParent(1).getName());
+		gp4Button.setText(user.getParent(2).getParent(2).getName());
+		
+	}
 	
 	public void saveTree(View view) {
 		//TODO Kriti: Insert code to save the tree to the SQL database
@@ -21,6 +43,40 @@ public class TreeActivity extends Activity {
 		finish();
 	}
 	
+	public void userClicked(View view) {
+		currentPerson = MainActivity.getUser();
+		startPersonActivity();
+	}
+	
+	public void p1Clicked(View view) {
+		currentPerson = MainActivity.getUser().getParent(1);
+		startPersonActivity();
+	}
+	
+	public void p2Clicked(View view) {
+		currentPerson = MainActivity.getUser().getParent(2);
+		startPersonActivity();
+	}
+	
+	public void gp1Clicked(View view) {
+		currentPerson = MainActivity.getUser().getParent(1).getParent(1);
+		startPersonActivity();
+	}
+	
+	public void gp2Clicked(View view) {
+		currentPerson = MainActivity.getUser().getParent(1).getParent(2);
+		startPersonActivity();
+	}
+	
+	public void gp3Clicked(View view) {
+		currentPerson = MainActivity.getUser().getParent(2).getParent(1);
+		startPersonActivity();
+	}
+	
+	public void gp4Clicked(View view) {
+		currentPerson = MainActivity.getUser().getParent(2).getParent(2);
+		startPersonActivity();
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +84,18 @@ public class TreeActivity extends Activity {
 		setContentView(R.layout.activity_display_tree);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		buildTree();
 	}
+	
+	public void startPersonActivity() {
+		Intent intent = new Intent(this, PersonActivity.class);
+		startActivity(intent);
+	}
+	
+	public static Person getCurrentPerson() {
+		return currentPerson;
+	}
+	
 
 	/**
 	 * Set up the {@link android.app.ActionBar}.
@@ -37,6 +104,11 @@ public class TreeActivity extends Activity {
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
+	}
+	
+	public void onResume() {
+		super.onResume();
+		buildTree();
 	}
 
 	@Override

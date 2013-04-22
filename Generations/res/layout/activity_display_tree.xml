@@ -27,6 +27,71 @@
             android:onClick="goBack"
             android:text="Back" />
 
+        <Button
+            android:id="@+id/userButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/treeBackButton"
+            android:layout_centerHorizontal="true"
+            android:onClick="userClicked"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/parent1Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userButton"
+            android:layout_toLeftOf="@+id/userButton"
+            android:onClick="p1Clicked"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/parent2Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userButton"
+            android:layout_toRightOf="@+id/userButton"
+            android:onClick="p2Clicked"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/gparent1Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/parent1Button"
+            android:layout_below="@+id/parent1Button"
+            android:layout_marginTop="20dp"
+            android:onClick="gp1Clicked"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/gparent2Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/gparent1Button"
+            android:layout_below="@+id/gparent1Button"
+            android:onClick="gp2Clicked"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/gparent3Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/gparent1Button"
+            android:layout_alignBottom="@+id/gparent1Button"
+            android:layout_alignLeft="@+id/parent2Button"
+            android:onClick="gp3Clicked"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/gparent4Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/gparent3Button"
+            android:layout_below="@+id/gparent3Button"
+            android:onClick="gp4Clicked"
+            android:text="Button" />
+
     </RelativeLayout>
 
 </LinearLayout>
