@@ -74,6 +74,8 @@ public class MainActivity extends Activity {
 		 *	Intent intent = new Intent(this, ExampleActivity.class);
 		 *	startActivity(intent);
 		 */
+		Intent intent = new Intent(this, ConnectionActivity.class);
+		startActivity(intent);
 	}
 	
 	public void displayTree(View view) {
