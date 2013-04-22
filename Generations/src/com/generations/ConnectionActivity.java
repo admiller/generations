@@ -2,12 +2,14 @@ package com.generations;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ConnectionActivity extends Activity {
@@ -16,6 +18,22 @@ public class ConnectionActivity extends Activity {
     private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
     private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
     private static final int REQUEST_ENABLE_BT = 3;
+    
+    // Key names received from the BluetoothChatService Handler
+    public static final String DEVICE_NAME = "device_name";
+    public static final String TOAST = "toast";
+    
+    // Message types sent from the BluetoothChatService Handler
+    public static final int MESSAGE_STATE_CHANGE = 1;
+    public static final int MESSAGE_READ = 2;
+    public static final int MESSAGE_WRITE = 3;
+    public static final int MESSAGE_DEVICE_NAME = 4;
+    public static final int MESSAGE_TOAST = 5;
+    
+    // Local Bluetooth adapter
+    private BluetoothAdapter mBluetoothAdapter = null;
+    // Member object for the chat services
+    private BluetoothService mService = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +52,16 @@ public class ConnectionActivity extends Activity {
             Intent serverIntent = new Intent(this, DeviceListActivity.class);
             startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
 		}
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		TextView tv1 = (TextView)findViewById(R.id.textView1);
+		String address = data.getExtras().getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+		tv1.setText(address);
+		// Get the BluetoothDevice object
+        BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+        // Attempt to connect to the device
+        mService.connect(device, true);
 	}
 
 	public void goBack(View view) {

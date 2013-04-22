@@ -1,10 +1,15 @@
 package com.generations;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Person {
+public class Person implements Serializable {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2775671114782499169L;
 	private Person parent1;
 	private Person parent2;
 	private boolean male;
@@ -29,6 +34,10 @@ public class Person {
 		} else {
 			parent2 = parent;
 		}
+	}
+	
+	public boolean getMale() {
+		return male;
 	}
 	
 	public Trait getTrait(String name) {
