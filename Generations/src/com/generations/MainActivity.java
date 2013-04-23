@@ -2,12 +2,16 @@ package com.generations;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends Activity {
 	
+	private static final String TAG = "MainActivity";
 	private static Person user;
 
 	@Override
@@ -16,6 +20,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		//TODO Kriti: Insert SQL Loading code here that will load previously made entries in the tree
+		
 		// Make sure that you set the User and all of their family upon load
 		// for now we will just use the following lines
 		Person mainUser = new Person("User", true, null, null);
@@ -74,6 +79,8 @@ public class MainActivity extends Activity {
 		 *	Intent intent = new Intent(this, ExampleActivity.class);
 		 *	startActivity(intent);
 		 */
+		Intent intent = new Intent(this, ConnectionActivity.class);
+		startActivity(intent);
 	}
 	
 	public void displayTree(View view) {

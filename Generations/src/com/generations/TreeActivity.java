@@ -95,7 +95,6 @@ public class TreeActivity extends Activity {
 	public static Person getCurrentPerson() {
 		return currentPerson;
 	}
-	
 
 	/**
 	 * Set up the {@link android.app.ActionBar}.
