@@ -5,7 +5,7 @@ public class Trait {
 	private String name;
 	private String trait;
 	
-	private String[] traits = {"hair color", "eye olor", "widows peak", "connected earlobes", "cleft chin"};
+	private String[] traits = {"hair color", "eye color", "widows peak", "connected earlobes", "cleft chin"};
 	
 	private String[] hairColor = {"brown", "blonde", "red"};
 	private String[] eyeColor = {"brown", "hazel", "green", "blue"};
@@ -64,11 +64,19 @@ public class Trait {
 		} else if(traits[1].equals("eye color")){
 			
 		} else if(traits[2].equals("widows peak")){
-			if(p2.getTrait("widows peak") == null || p3.getTrait("widows peak") == null){
+			if(p2.getTrait("widows peak").getTrait() == null || p3.getTrait("widows peak").getTrait() == null){
 				if(p1.getTrait("widows peak").getTrait() == widowsPeak[0]){
-					//alleles are 2 dominant
+					p1.addAllele(new Trait("widows peak", "dd"));
 				} else{
-					//alleles are 2 recessive
+					p1.addAllele(new Trait("widows peak", "rr"));
+				}
+			} else{
+				if(p1.getTrait("widows peak").getTrait() == widowsPeak[0] && (p2.getTrait("widows peak").getTrait() == widowsPeak[1] || p3.getTrait("widows peak").getTrait() == widowsPeak[1])){
+					p1.addAllele(new Trait("widows peak", "dr"));
+				}else if(p1.getTrait("widows peak").getTrait() == widowsPeak[0]){
+					p1.addAllele(new Trait("widows peak", "dd"));
+				} else{
+					p1.addAllele(new Trait("widows peak", "rr"));
 				}
 			}
 			

@@ -19,6 +19,7 @@ public class Person implements Serializable {
 	private boolean male;
 	private String name;
 	private ArrayList<Trait> traits;
+	private ArrayList<Trait> alleles;
 
 	public Person(String name, boolean male, Person parent1, Person parent2) {
 		this.name = name;
@@ -68,6 +69,10 @@ public class Person implements Serializable {
 		traits.add(trait);
 	}
 
+	public void addAllele(Trait allele){
+		alleles.add(allele);
+	}
+	
 	public ArrayList<Trait> getTraits() {
 		return traits;
 	}
