@@ -20,18 +20,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		//TODO Kriti: Insert SQL Loading code here that will load previously made entries in the tree
-		PersonOpenHelper poh = new PersonOpenHelper(this);
-		SQLiteDatabase db = null;
-		try {
-			db = poh.getReadableDatabase();
-		} catch(SQLiteException e) {
-			Log.e(TAG, "Database could not be opened");
-			e.printStackTrace();
-		}
-		if(db == null) {
-			Log.e(TAG, "DB was null");
-			
-		}
+		
 		// Make sure that you set the User and all of their family upon load
 		// for now we will just use the following lines
 		Person mainUser = new Person("User", true, null, null);
