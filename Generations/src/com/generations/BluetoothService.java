@@ -212,10 +212,10 @@ public class BluetoothService {
 
     /**
      * Write to the ConnectedThread in an unsynchronized manner
-     * @param out The bytes to write
+     * @param out The person to write
      * @see ConnectedThread#write(byte[])
      */
-    public void write(byte[] out) {
+    public void write(Person out) {
         // Create temporary object
         ConnectedThread r;
         // Synchronize a copy of the ConnectedThread
@@ -470,9 +470,10 @@ public class BluetoothService {
          * Write to the connected OutStream.
          * @param buffer  The bytes to write
          */
-        public void write(byte[] buffer) {
+        public void write(Person buffer) {
             try {
-                mmOutStream.write(buffer);
+            	
+                mmOutStream.write(buffer.serialize());
 
                 // Share the sent message back to the UI Activity
                 mHandler.obtainMessage(ConnectionActivity.MESSAGE_WRITE, -1, -1, buffer)
