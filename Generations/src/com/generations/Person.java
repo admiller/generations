@@ -19,6 +19,7 @@ public class Person implements Serializable {
 	private boolean male;
 	private String name;
 	private ArrayList<Trait> traits;
+	private int id;
 
 	public Person(String name, boolean male, Person parent1, Person parent2) {
 		this.name = name;
@@ -26,10 +27,19 @@ public class Person implements Serializable {
 		this.parent1 = parent1;
 		this.parent2 = parent2;
 		traits = new ArrayList<Trait>();
+		id = -1;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public void setParent(int id, Person parent) {

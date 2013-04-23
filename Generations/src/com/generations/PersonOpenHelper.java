@@ -35,6 +35,7 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(TABLE_CREATE);
+		db.close();
 	}
 	
 	// Upgrades database
@@ -71,12 +72,13 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 		return person;
 	}
 	
-	public List<Person> getAllContacts() {
+	// Get all people
+	public List<Person> getAllPeople() {
         List<Person> personList = new ArrayList<Person>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_PEOPLE;
  
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
  
         // looping through all rows and adding to list
@@ -92,5 +94,30 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
         return personList;
     }
 	
+	// Updating single person
+	public int updatePerson(Person person) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_NAME, person.getName());
+		
+		// updating row
+		return db.update(TABLE_PEOPLE, cv, KEY_ID + "=?", new String[] { String.valueOf(person.getId()) });
+	}
 	
+	// Deleting single person
+	public void deletePerson(Person person) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_PEOPLE, KEY_ID + "=?", new String[] { String.valueOf(person.getId()) });
+		db.close();
+	}
+	
+	// Getting people count
+	public int getPeopleCount() {
+		String countQuery = "SELECT  * FROM " + TABLE_PEOPLE;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(countQuery, null);
+		cursor.close();
+		return cursor.getCount();
+	}
 }

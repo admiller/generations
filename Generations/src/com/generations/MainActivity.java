@@ -1,9 +1,9 @@
 package com.generations;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,8 +19,6 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//TODO Kriti: Insert SQL Loading code here that will load previously made entries in the tree
-		
 		// Make sure that you set the User and all of their family upon load
 		// for now we will just use the following lines
 		Person mainUser = new Person("User", true, null, null);
@@ -30,6 +28,13 @@ public class MainActivity extends Activity {
 		Person gp2 = new Person("GParent 2", false, null, null);
 		Person gp3 = new Person("GParent 3", true, null, null);
 		Person gp4 = new Person("GParent 4", false, null, null);
+		mainUser.setId(0);
+		mom.setId(1);
+		dad.setId(2);
+		gp1.setId(3);
+		gp2.setId(4);
+		gp3.setId(5);
+		gp4.setId(6);
 		mainUser.setParent(1, mom);
 		mainUser.setParent(2, dad);
 		mom.setParent(1, gp1);
@@ -44,6 +49,28 @@ public class MainActivity extends Activity {
 		createTraits(gp3);
 		createTraits(gp4);
 		setUser(mainUser);
+		
+		
+		//TODO Kriti: Insert SQL Loading code here that will load previously made entries in the tree
+		// Inserting People
+		Log.d(TAG, "Inserting people into db");
+		PersonOpenHelper db = new PersonOpenHelper(this);
+		db.addPerson(mainUser);
+		db.addPerson(mom);
+		db.addPerson(dad);
+		db.addPerson(gp1);
+		db.addPerson(gp2);
+		db.addPerson(gp3);
+		db.addPerson(gp4);
+		
+		// Reading people
+		Log.i(TAG, "Reading people from db");
+		List<Person> people = db.getAllPeople();
+		for(Person p : people) {
+			String log = "ID: " + p.getId() + ", Name: " + p.getName();
+			Log.d(TAG, log);
+		}
+		
 	}
 	
 	public static void createTraits(Person person) {
