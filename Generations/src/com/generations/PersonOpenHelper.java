@@ -17,17 +17,27 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 	// Database version
 	private static final int DATABASE_VERSION = 1;
 	// Database name
-	private static final String DATABASE_NAME = "tree";
+	private static final String DATABASE_NAME = "fulltree";
 	// Table name
 	private static final String TABLE_PEOPLE = "people";
 	// Column names
 	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name"; 
+	private static final String KEY_HAIR = "hair";
+	private static final String KEY_EYE = "eye";
+	private static final String KEY_PEAK = "peak";
+	private static final String KEY_EAR = "ear";
+	private static final String KEY_CHIN = "chin";
 	// Table creation 
 	private static final String TABLE_CREATE =
 			"CREATE TABLE " + TABLE_PEOPLE + "("
 					+ KEY_ID + " INT PRIMARY KEY,"
 					+ KEY_NAME + " TEXT"
+					+ KEY_HAIR + " TEXT"
+					+ KEY_EYE + " TEXT"
+					+ KEY_PEAK + " TEXT"
+					+ KEY_EAR + " TEXT"
+					+ KEY_CHIN + " TEXT"
 					+ ")";
 	
 	public PersonOpenHelper(Context context) {
@@ -63,12 +73,17 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 		ContentValues cv = new ContentValues();
 		
 		cv.put(KEY_NAME, person.getName());
+		cv.put(KEY_HAIR, person.getTrait("Hair Color").getTrait());
+		cv.put(KEY_EYE, person.getTrait("Eye Color").getTrait());
+		cv.put(KEY_PEAK, person.getTrait("Widows Peak").getTrait());
+		cv.put(KEY_EAR, person.getTrait("Connected Earlobes").getTrait());
+		cv.put(KEY_CHIN, person.getTrait("Cleft Chin").getTrait());
 		db.insert(TABLE_PEOPLE, null, cv);
 		db.close(); // close db connection
 	}
 	
 	// Getting single person
-	Person getPerson(int id) {
+	public Person getPerson(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(TABLE_PEOPLE, new String[] { KEY_ID, KEY_NAME }, KEY_ID + "=?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
@@ -76,6 +91,11 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 			cursor.moveToFirst();
 		}
 		Person person = new Person(cursor.getString(1), true, id, null, null);
+		person.getTrait("Hair Color").setTrait(cursor.getString(2));
+		person.getTrait("Eye Color").setTrait(cursor.getString(3));
+		person.getTrait("Widows Peak").setTrait(cursor.getString(4));
+		person.getTrait("Connected Earlobes").setTrait(cursor.getString(5));
+		person.getTrait("Cleft Chin").setTrait(cursor.getString(6));
 		return person;
 	}
 	
@@ -93,6 +113,11 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Person person = new Person(cursor.getString(1), true, i, null, null);
+        		person.getTrait("Hair Color").setTrait(cursor.getString(2));
+        		person.getTrait("Eye Color").setTrait(cursor.getString(3));
+        		person.getTrait("Widows Peak").setTrait(cursor.getString(4));
+        		person.getTrait("Connected Earlobes").setTrait(cursor.getString(5));
+        		person.getTrait("Cleft Chin").setTrait(cursor.getString(6));
                 i++;
                 // Adding contact to list
                 personList.add(person);
