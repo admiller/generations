@@ -8,8 +8,8 @@ public class Trait {
 	private String[] traits = { "hair color", "eye color", "widows peak",
 			"connected earlobes", "cleft chin" };
 
-	public static String[] hairColor = { "brown", "blonde", "red" };
-	public static String[] eyeColor = { "brown", "hazel", "green", "blue" };
+	public static String[] hairColor = { "brown", "blonde"};
+	public static String[] eyeColor = { "brown", "blue" };
 	public static String[] widowsPeak = { "yes", "no" };
 	public static String[] connectedEarlobes = { "no", "yes" };
 	public static String[] cleftChin = { "yes", "no" };
@@ -62,6 +62,7 @@ public class Trait {
 
 	// <<<<<<< HEAD
 
+
 	// TODO: Jarrett You can use this area for trait tracking as well
 
 	public Person createChild(String name, boolean male, int id, Person p1,
@@ -92,21 +93,7 @@ public class Trait {
 				if (p1.getTrait(traits[i]).getTrait().equals(temp[0])) {
 					p1.addAllele(new Trait(traits[i], "dd"));
 				} else {
-					if (traits[i].equals("hair color")
-							&& p1.getTrait("hair color").getTrait()
-									.equals(hairColor[2])) {
-						p1.addAllele(new Trait(traits[i], "tt"));
-					}
-					if (traits[i].equals("eye color")
-							&& p1.getTrait("eye color").getTrait()
-									.equals(eyeColor[2])) {
-						p1.addAllele(new Trait(traits[i], "tt"));
-					} else if (p1.getTrait("eye color").getTrait()
-							.equals(eyeColor[3])) {
-						p1.addAllele(new Trait(traits[i], "yy"));
-					} else {
-						p1.addAllele(new Trait(traits[i], "rr"));
-					}
+					p1.addAllele(new Trait(traits[i], "rr"));
 				}
 			} else {
 				if (p1.getTrait(traits[i]).getTrait().equals(temp[0])
