@@ -19,6 +19,7 @@ package com.generations;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import android.bluetooth.BluetoothAdapter;
@@ -473,8 +474,14 @@ public class BluetoothService {
         public void write(Person buffer) {
             try {
             	
+            	ArrayList<Trait> alleles = buffer.getAlleleList();
+            	String outString = buffer.getName();
+            	for(int i = 0; i < alleles.size(); i++) {
+            		outString += " " + alleles.get(i).getTrait();
+            	}
+            	
                 mmOutStream.write(buffer.serialize());
-
+                
                 // Share the sent message back to the UI Activity
                 mHandler.obtainMessage(ConnectionActivity.MESSAGE_WRITE, -1, -1, buffer)
                         .sendToTarget();
