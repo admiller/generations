@@ -7,7 +7,7 @@ public class Trait {
 	private String name;
 	private String trait;
 
-	private String[] traits = { "hair color", "eye color", "widows peak",
+	private static String[] traits = { "hair color", "eye color", "widows peak",
 			"connected earlobes", "cleft chin" };
 
 	public static String[] hairColor = { "brown", "blonde" };
@@ -47,7 +47,7 @@ public class Trait {
 		this.trait = trait;
 	}
 
-	public String[] getArray(String name) {
+	public static String[] getArray(String name) {
 		if (name.equals("hair color")) {
 			return hairColor;
 		} else if (name.equals("eye color")) {
@@ -64,7 +64,7 @@ public class Trait {
 
 	// TODO: Jarrett You can use this area for trait tracking as well
 
-	public Person createChild(String name, boolean male, int id, Person p1,
+	public static Person createChild(String name, boolean male, int id, Person p1,
 			Person p2) {
 		Person child = new Person(name, male, id, p1, p2);
 
@@ -82,7 +82,7 @@ public class Trait {
 		return child;
 	}
 
-	public Person getParentAlleles(Person p1, Person p2, Person p3) {
+	public static Person getParentAlleles(Person p1, Person p2, Person p3) {
 		// doesn't work for hair and eye color because there are more than 2
 		// options
 		for (int i = 0; i < traits.length; i++) {
@@ -109,7 +109,7 @@ public class Trait {
 		return p1;
 	}
 
-	public ArrayList<String> createChild(ArrayList<Trait> p1,
+	public static ArrayList<String> createChild(ArrayList<Trait> p1,
 			ArrayList<Trait> p2) {
 		ArrayList<String> child = new ArrayList<String>();
 		String[] punnett = new String[4];
@@ -122,13 +122,18 @@ public class Trait {
 					+ p2.get(i).getTrait().substring(1);
 			punnett[3] = p1.get(i).getTrait().substring(1)
 					+ p2.get(i).getTrait().substring(1);
-			int temp = (int) (Math.random() * 3.0);
-			child.add(punnett[temp]);
+			int temp = (int) (Math.random() * 4.0);
+			
+			if(punnett[temp].contains("d")){
+				child.add(getArray(traits[i])[0]);
+			} else{
+				child.add(getArray(traits[i])[1]);
+			}
 		}
 		return child;
 	}
 
-	public Person combineAlleles(String name, boolean male, int id, Person p1,
+	public static Person combineAlleles(String name, boolean male, int id, Person p1,
 			Person p2) {
 		Person child = new Person(name, male, id, p1, p2);
 		String[] punnett = new String[4];
@@ -142,7 +147,7 @@ public class Trait {
 					+ p2.getAllele(traits[i]).getTrait().substring(0, 1);
 			punnett[3] = p1.getAllele(traits[i]).getTrait().substring(1)
 					+ p2.getAllele(traits[i]).getTrait().substring(1);
-			int temp = (int) Math.random() * 3;
+			int temp = (int) (Math.random() * 4.0);
 			child.addAllele(new Trait(traits[i], punnett[temp]));
 
 			if (punnett[temp].contains("d")) {
