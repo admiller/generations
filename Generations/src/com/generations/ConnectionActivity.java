@@ -109,6 +109,7 @@ public class ConnectionActivity extends Activity {
 				switch (msg.arg1) {
 				case BluetoothService.STATE_CONNECTED:
 					setStatus("Connected to: " + mConnectedDeviceName);
+					sendMainUser();
 					break;
 				case BluetoothService.STATE_CONNECTING:
 					setStatus(R.string.title_connecting);
@@ -128,6 +129,7 @@ public class ConnectionActivity extends Activity {
 				 */
 				break;
 			case MESSAGE_READ:
+				Log.i(TAG, "Case MESSAGE_READ Reached");
 				Person readPerson = null;
 				try {
 					readPerson = Person.deserialize((byte[]) msg.obj);
