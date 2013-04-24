@@ -17,68 +17,6 @@
             android:onClick="goBack"
             android:text="Back" />
 
-        <EditText
-            android:id="@+id/hairColorTextField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/personBackButton"
-            android:layout_marginTop="25dp"
-            android:ems="10" >
-
-            <requestFocus />
-        </EditText>
-
-        <EditText
-            android:id="@+id/eyeColorTextField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/hairColorTextField"
-            android:ems="10" />
-
-        <CheckBox
-            android:id="@+id/widowsPeakBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/eyeColorTextField"
-            android:text="Widows Peak" />
-
-        <CheckBox
-            android:id="@+id/earlobesBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/widowsPeakBox"
-            android:text="Connecting Earlobes" />
-
-        <CheckBox
-            android:id="@+id/cleftChinBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/earlobesBox"
-            android:text="Cleft Chin" />
-
-        <TextView
-            android:id="@+id/HairColorTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/hairColorTextField"
-            android:layout_alignParentLeft="true"
-            android:text="Hair Color"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/eyeColorTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/eyeColorTextField"
-            android:layout_alignParentLeft="true"
-            android:text="Eye Color"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
         <Button
             android:id="@+id/personSaveButton"
             android:layout_width="wrap_content"
@@ -93,9 +31,98 @@
             android:id="@+id/personName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/hairColorTextField"
             android:layout_alignParentRight="true"
             android:ems="10" />
+
+        <Spinner
+            android:id="@+id/spinnerHairColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/personBackButton"
+            android:entries="@array/hc_array"
+            android:prompt="@string/hc_prompt" />
+
+        <Spinner
+            android:id="@+id/spinnerEyeColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spinnerHairColor"
+            android:entries="@array/ec_array"
+        	android:prompt="@string/ec_prompt" />
+
+        <Spinner
+            android:id="@+id/spinnerWidowsPeak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spinnerEyeColor"
+            android:entries="@array/wp_array"
+        	android:prompt="@string/wp_prompt" />
+
+        <Spinner
+            android:id="@+id/spinnerConnectedEarlobes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spinnerWidowsPeak"
+            android:entries="@array/ce_array"
+        	android:prompt="@string/ce_prompt" />
+
+        <Spinner
+            android:id="@+id/spinnerCleftChin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spinnerConnectedEarlobes"
+            android:entries="@array/cc_array"
+        	android:prompt="@string/cc_prompt" />
+
+        <TextView
+            android:id="@+id/ecTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinnerEyeColor"
+            android:layout_alignParentRight="true"
+            android:text="Eye Color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/hcTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinnerHairColor"
+            android:layout_alignParentRight="true"
+            android:text="Hair Color"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/wpTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinnerWidowsPeak"
+            android:layout_alignParentRight="true"
+            android:text="Widows Peak"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/ceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinnerConnectedEarlobes"
+            android:layout_alignParentRight="true"
+            android:text="Connected Earlobes"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/ccTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/spinnerCleftChin"
+            android:layout_alignParentRight="true"
+            android:text="Cleft Chin"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
 

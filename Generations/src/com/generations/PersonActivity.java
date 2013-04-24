@@ -6,10 +6,9 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 
 public class PersonActivity extends Activity {
 	
@@ -24,31 +23,65 @@ public class PersonActivity extends Activity {
 	
 	public void loadPerson() {
 		Person person = TreeActivity.getCurrentPerson();
+		EditText name = (EditText)findViewById(R.id.personName);
+		Spinner hcSpinner = (Spinner)findViewById(R.id.spinnerHairColor);
+		Spinner ecSpinner = (Spinner)findViewById(R.id.spinnerEyeColor);
+		Spinner wpSpinner = (Spinner)findViewById(R.id.spinnerWidowsPeak);
+		Spinner ceSpinner = (Spinner)findViewById(R.id.spinnerConnectedEarlobes);
+		Spinner ccSpinner = (Spinner)findViewById(R.id.spinnerCleftChin);
 		if(person != null) {
-			EditText name = (EditText)findViewById(R.id.personName);
-			EditText hairColor = (EditText)findViewById(R.id.hairColorTextField);
-			EditText eyeColor = (EditText)findViewById(R.id.eyeColorTextField);
-			CheckBox wpBox = (CheckBox)findViewById(R.id.widowsPeakBox);
-			CheckBox ceBox = (CheckBox)findViewById(R.id.earlobesBox);
-			CheckBox ccBox = (CheckBox)findViewById(R.id.cleftChinBox);
+			String hc = person.getTrait("Hair Color").getTrait();
+			String ec = person.getTrait("Eye Color").getTrait();
+			String wp = person.getTrait("Widows Peak").getTrait();
+			String ce = person.getTrait("Connected Earlobes").getTrait();
+			String cc = person.getTrait("Cleft Chin").getTrait();
+			
+			int hcIndex = 0;
+			int ecIndex = 0;
+			int wpIndex = 0;
+			int ceIndex = 0;
+			int ccIndex = 0;
+			for(int i = 0; i < Trait.hairColor.length; i++) {
+				if(Trait.hairColor[i].equalsIgnoreCase(hc)) {
+					hcIndex = i;
+					break;
+				}
+			}
+			
+			for(int i = 0; i < Trait.eyeColor.length; i++) {
+				if(Trait.eyeColor[i].equalsIgnoreCase(ec)) {
+					ecIndex = i;
+					break;
+				}
+			}
+			
+			for(int i = 0; i < Trait.widowsPeak.length; i++) {
+				if(Trait.widowsPeak[i].equalsIgnoreCase(wp)) {
+					wpIndex = i;
+					break;
+				}
+			}
+			
+			for(int i = 0; i < Trait.connectedEarlobes.length; i++) {
+				if(Trait.connectedEarlobes[i].equalsIgnoreCase(ce)) {
+					ceIndex = i;
+					break;
+				}
+			}
+			
+			for(int i = 0; i < Trait.cleftChin.length; i++) {
+				if(Trait.cleftChin[i].equalsIgnoreCase(cc)) {
+					ccIndex = i;
+					break;
+				}
+			}
+			
 			name.setText(person.getName());
-			hairColor.setText(person.getTrait("Hair Color").getTrait());
-			eyeColor.setText(person.getTrait("Eye Color").getTrait());
-			if(person.getTrait("Widows Peak").getTrait().equalsIgnoreCase("yes")) {
-				wpBox.setChecked(true);
-			} else {
-				wpBox.setChecked(false);
-			}
-			if(person.getTrait("Connected Earlobes").getTrait().equalsIgnoreCase("yes")) {
-				ceBox.setChecked(true);
-			} else {
-				ceBox.setChecked(false);
-			}
-			if(person.getTrait("Cleft Chin").getTrait().equalsIgnoreCase("yes")) {
-				ccBox.setChecked(true);
-			} else {
-				ccBox.setChecked(false);
-			}
+			hcSpinner.setSelection(hcIndex);
+			ecSpinner.setSelection(ecIndex);
+			wpSpinner.setSelection(wpIndex);
+			ceSpinner.setSelection(ceIndex);
+			ccSpinner.setSelection(ccIndex);
 		}
 	}
 	
@@ -56,17 +89,21 @@ public class PersonActivity extends Activity {
 		Person person = TreeActivity.getCurrentPerson();
 		if(person != null) {
 			EditText name = (EditText)findViewById(R.id.personName);
-			EditText hairColor = (EditText)findViewById(R.id.hairColorTextField);
-			EditText eyeColor = (EditText)findViewById(R.id.eyeColorTextField);
-			CheckBox wpBox = (CheckBox)findViewById(R.id.widowsPeakBox);
-			CheckBox ceBox = (CheckBox)findViewById(R.id.earlobesBox);
-			CheckBox ccBox = (CheckBox)findViewById(R.id.cleftChinBox);
-			String wp = wpBox.isChecked() ? "yes" : "no";
-			String ce = ceBox.isChecked() ? "yes" : "no";
-			String cc = ccBox.isChecked() ? "yes" : "no";
+			Spinner hcSpinner = (Spinner)findViewById(R.id.spinnerHairColor);
+			Spinner ecSpinner = (Spinner)findViewById(R.id.spinnerEyeColor);
+			Spinner wpSpinner = (Spinner)findViewById(R.id.spinnerWidowsPeak);
+			Spinner ceSpinner = (Spinner)findViewById(R.id.spinnerConnectedEarlobes);
+			Spinner ccSpinner = (Spinner)findViewById(R.id.spinnerCleftChin);
+			
+			String hc = hcSpinner.getSelectedItem().toString();
+			String ec = ecSpinner.getSelectedItem().toString();
+			String wp = wpSpinner.getSelectedItem().toString();
+			String ce = ceSpinner.getSelectedItem().toString();
+			String cc = ccSpinner.getSelectedItem().toString();
+			
 			person.setName(name.getText().toString());
-			person.getTrait("Hair Color").setTrait(hairColor.getText().toString());
-			person.getTrait("Eye Color").setTrait(eyeColor.getText().toString());
+			person.getTrait("Hair Color").setTrait(hc);
+			person.getTrait("Eye Color").setTrait(ec);
 			person.getTrait("Widows Peak").setTrait(wp);
 			person.getTrait("Connected Earlobes").setTrait(ce);
 			person.getTrait("Cleft Chin").setTrait(cc);
@@ -112,3 +149,4 @@ public class PersonActivity extends Activity {
 	}
 
 }
+

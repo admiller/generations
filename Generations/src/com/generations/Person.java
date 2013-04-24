@@ -19,11 +19,8 @@ public class Person implements Serializable {
 	private boolean male;
 	private String name;
 	private ArrayList<Trait> traits;
-<<<<<<< HEAD
 	private ArrayList<Trait> alleles;
-=======
 	private int id;
->>>>>>> f9ec377eefb7789a64ab4f1c6533a60a2521b72d
 
 	public Person(String name, boolean male, int id, Person parent1, Person parent2) {
 		this.name = name;
@@ -66,6 +63,15 @@ public class Person implements Serializable {
 		}
 		return null;
 	}
+	
+	public Trait getAllele(String name) {
+		for (int i = 0; i < alleles.size(); i++) {
+			if (alleles.get(i).getName().equalsIgnoreCase(name)) {
+				return alleles.get(i);
+			}
+		}
+		return null;
+	}
 
 	public Person getParent(int id) {
 		if (id == 1) {
@@ -85,6 +91,8 @@ public class Person implements Serializable {
 	public void addAllele(Trait allele){
 		alleles.add(allele);
 	}
+	
+	
 	
 	public ArrayList<Trait> getTraits() {
 		return traits;

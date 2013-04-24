@@ -5,14 +5,14 @@ public class Trait {
 	private String name;
 	private String trait;
 
-	private String[] traits = { "hair color", "eye color", "widows peak",
+	public static String[] traits = { "hair color", "eye color", "widows peak",
 			"connected earlobes", "cleft chin" };
 
-	private String[] hairColor = { "brown", "blonde", "red" };
-	private String[] eyeColor = { "brown", "hazel", "green", "blue" };
-	private String[] widowsPeak = { "yes", "no" };
-	private String[] connectedEarlobes = { "no", "yes" };
-	private String[] cleftChin = { "yes", "no" };
+	public static String[] hairColor = { "brown", "blonde", "red" };
+	public static String[] eyeColor = { "brown", "hazel", "green", "blue" };
+	public static String[] widowsPeak = { "yes", "no" };
+	public static String[] connectedEarlobes = { "no", "yes" };
+	public static String[] cleftChin = { "yes", "no" };
 
 	/**
 	 * Constructor
@@ -44,23 +44,14 @@ public class Trait {
 	public void setTrait(String trait) {
 		this.trait = trait;
 	}
-//<<<<<<< HEAD
 
 	// TODO: Jarrett You can use this area for trait tracking as well
 
 	public Person createChild(String name, boolean male, Person p1, Person p2) {
-		Person child = new Person(name, male, p1, p2);
+		Person child = new Person(name, male, -1, p1, p2);
 
 		// gets the alleles from parent 1 and parent 2
-//=======
-	
-	//TODO: Jarrett You can use this area for trait tracking as well
-	
-//	public Person createChild(String name, boolean male, Person p1, Person p2){
-//		Person child = new Person(name, male, -1, p1, p2);
-		
-		//gets the alleles from parent 1 and parent 2
-//>>>>>>> f9ec377eefb7789a64ab4f1c6533a60a2521b72d
+
 		Person gp1p1 = p1.getParent(0);
 		Person gp2p1 = p1.getParent(1);
 		p1 = getAlleles(p1, gp1p1, gp2p1);

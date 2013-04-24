@@ -140,7 +140,7 @@ public class ConnectionActivity extends Activity {
 					e.printStackTrace();
 					Log.e(TAG, "CNFException in MESSAGE_READ");
 				}
-				TextView tv1 = (TextView) findViewById(R.id.textView1);
+				TextView tv1 = (TextView) findViewById(R.id.hcTextView);
 				String info = "Error receiving person";
 				if (readPerson != null) {
 					info = "Name: " + readPerson.getName() + " Male: "

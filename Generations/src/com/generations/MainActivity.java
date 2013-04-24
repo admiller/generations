@@ -52,6 +52,9 @@ public class MainActivity extends Activity {
 				Log.i(TAG, "GP2 Name: " + gp2.getName());
 				Log.i(TAG, "GP3 Name: " + gp3.getName());
 				Log.i(TAG, "GP4 Name: " + gp4.getName());
+				for(int i = 0; i < 7; i++) {
+					createTraits(people.get(i));
+				}
 				setUser(main);
 			} else {
 				createDefaultTree();
