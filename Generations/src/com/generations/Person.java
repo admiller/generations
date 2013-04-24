@@ -92,7 +92,9 @@ public class Person implements Serializable {
 		alleles.add(allele);
 	}
 	
-	
+	public ArrayList<Trait> getAlleleList(){
+		return alleles;
+	}
 	
 	public ArrayList<Trait> getTraits() {
 		return traits;
