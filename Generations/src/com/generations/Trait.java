@@ -60,8 +60,6 @@ public class Trait {
 		return null;
 	}
 
-	// <<<<<<< HEAD
-
 
 	// TODO: Jarrett You can use this area for trait tracking as well
 
