@@ -117,5 +117,5 @@ public class Person implements Serializable {
 	// TODO Jarrett Insert code to track traits here.
 	// You may have to create other classes, but for now you can just start
 	// adding info here
-
+	
 }

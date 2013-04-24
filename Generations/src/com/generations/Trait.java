@@ -1,5 +1,7 @@
 package com.generations;
 
+import java.util.ArrayList;
+
 public class Trait {
 
 	private String name;
@@ -8,7 +10,7 @@ public class Trait {
 	private String[] traits = { "hair color", "eye color", "widows peak",
 			"connected earlobes", "cleft chin" };
 
-	public static String[] hairColor = { "brown", "blonde"};
+	public static String[] hairColor = { "brown", "blonde" };
 	public static String[] eyeColor = { "brown", "blue" };
 	public static String[] widowsPeak = { "yes", "no" };
 	public static String[] connectedEarlobes = { "no", "yes" };
@@ -60,7 +62,6 @@ public class Trait {
 		return null;
 	}
 
-
 	// TODO: Jarrett You can use this area for trait tracking as well
 
 	public Person createChild(String name, boolean male, int id, Person p1,
@@ -108,6 +109,25 @@ public class Trait {
 		return p1;
 	}
 
+	public ArrayList<String> createChild(ArrayList<Trait> p1,
+			ArrayList<Trait> p2) {
+		ArrayList<String> child = new ArrayList<String>();
+		String[] punnett = new String[4];
+		for (int i = 0; i < traits.length; i++) {
+			punnett[0] = p1.get(i).getTrait().substring(0, 1)
+					+ p2.get(i).getTrait().substring(0, 1);
+			punnett[1] = p1.get(i).getTrait().substring(1)
+					+ p2.get(i).getTrait().substring(0, 1);
+			punnett[2] = p1.get(i).getTrait().substring(0, 1)
+					+ p2.get(i).getTrait().substring(1);
+			punnett[3] = p1.get(i).getTrait().substring(1)
+					+ p2.get(i).getTrait().substring(1);
+			int temp = (int) (Math.random() * 3.0);
+			child.add(punnett[temp]);
+		}
+		return child;
+	}
+
 	public Person combineAlleles(String name, boolean male, int id, Person p1,
 			Person p2) {
 		Person child = new Person(name, male, id, p1, p2);
@@ -133,7 +153,7 @@ public class Trait {
 				child.addTrait(new Trait(traits[i], getArray(traits[i])[1]));
 			}
 		}
-
 		return child;
 	}
+
 }
