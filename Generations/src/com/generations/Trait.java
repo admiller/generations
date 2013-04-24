@@ -5,14 +5,14 @@ public class Trait {
 	private String name;
 	private String trait;
 
-	public static String[] traits = { "hair color", "eye color", "widows peak",
+	private String[] traits = { "hair color", "eye color", "widows peak",
 			"connected earlobes", "cleft chin" };
 
-	public static String[] hairColor = { "brown", "blonde", "red" };
-	public static String[] eyeColor = { "brown", "hazel", "green", "blue" };
-	public static String[] widowsPeak = { "yes", "no" };
-	public static String[] connectedEarlobes = { "no", "yes" };
-	public static String[] cleftChin = { "yes", "no" };
+	private String[] hairColor = { "brown", "blonde", "red" };
+	private String[] eyeColor = { "brown", "hazel", "green", "blue" };
+	private String[] widowsPeak = { "yes", "no" };
+	private String[] connectedEarlobes = { "no", "yes" };
+	private String[] cleftChin = { "yes", "no" };
 
 	/**
 	 * Constructor
@@ -45,104 +45,97 @@ public class Trait {
 		this.trait = trait;
 	}
 
+	public String[] getArray(String name) {
+		if (name.equals("hair color")) {
+			return hairColor;
+		} else if (name.equals("eye color")) {
+			return eyeColor;
+		} else if (name.equals("widows peak")) {
+			return widowsPeak;
+		} else if (name.equals("connected earlobes")) {
+			return connectedEarlobes;
+		} else if (name.equals("cleft chin")) {
+			return cleftChin;
+		}
+		return null;
+	}
+
+	// <<<<<<< HEAD
+
+
 	// TODO: Jarrett You can use this area for trait tracking as well
 
-	public Person createChild(String name, boolean male, Person p1, Person p2) {
-		Person child = new Person(name, male, -1, p1, p2);
+	public Person createChild(String name, boolean male, int id, Person p1,
+			Person p2) {
+		Person child = new Person(name, male, id, p1, p2);
 
 		// gets the alleles from parent 1 and parent 2
-
 		Person gp1p1 = p1.getParent(0);
 		Person gp2p1 = p1.getParent(1);
-		p1 = getAlleles(p1, gp1p1, gp2p1);
-		
+		p1 = getParentAlleles(p1, gp1p1, gp2p1);
+
 		Person gp1p2 = p2.getParent(0);
 		Person gp2p2 = p2.getParent(1);
-		p2 = getAlleles(p2, gp1p2, gp2p2);
+		p2 = getParentAlleles(p2, gp1p2, gp2p2);
 
-		// combineTraits()
+		child = combineAlleles(name, male, id, p1, p2);
 
 		return child;
 	}
 
-	public Person getAlleles(Person p1, Person p2, Person p3) {
-		
-		
-		if (p2.getTrait("widows peak").getTrait() == null
-				|| p3.getTrait("widows peak").getTrait() == null) {
-			if (p1.getTrait("widows peak").getTrait() == widowsPeak[0]) {
-				p1.addAllele(new Trait("widows peak", "dd"));
+	public Person getParentAlleles(Person p1, Person p2, Person p3) {
+		// doesn't work for hair and eye color because there are more than 2
+		// options
+		for (int i = 0; i < traits.length; i++) {
+			String[] temp = getArray(traits[i]);
+			if (p2.getTrait(traits[i]).getTrait() == null
+					|| p3.getTrait(traits[i]).getTrait() == null) {
+				if (p1.getTrait(traits[i]).getTrait().equals(temp[0])) {
+					p1.addAllele(new Trait(traits[i], "dd"));
+				} else {
+					p1.addAllele(new Trait(traits[i], "rr"));
+				}
 			} else {
-				p1.addAllele(new Trait("widows peak", "rr"));
-			}
-		} else {
-			if (p1.getTrait("widows peak").getTrait() == widowsPeak[0]
-					&& (p2.getTrait("widows peak").getTrait() == widowsPeak[1] || p3
-							.getTrait("widows peak").getTrait() == widowsPeak[1])) {
-				p1.addAllele(new Trait("widows peak", "dr"));
-			} else if (p1.getTrait("widows peak").getTrait() == widowsPeak[0]) {
-				p1.addAllele(new Trait("widows peak", "dd"));
-			} else {
-				p1.addAllele(new Trait("widows peak", "rr"));
-			}
-		}
-
-		if (p2.getTrait("connected earlobes").getTrait() == null
-				|| p3.getTrait("connected earlobes").getTrait() == null) {
-			if (p1.getTrait("connected earlobes").getTrait() == connectedEarlobes[0]) {
-				p1.addAllele(new Trait("connected earlobes", "dd"));
-			} else {
-				p1.addAllele(new Trait("connected earlobes", "rr"));
-			}
-		} else {
-			if (p1.getTrait("connected earlobes").getTrait() == connectedEarlobes[0]
-					&& (p2.getTrait("connected earlobes").getTrait() == connectedEarlobes[1] || p3
-							.getTrait("connected earlobes").getTrait() == connectedEarlobes[1])) {
-				p1.addAllele(new Trait("connected earlobes", "dr"));
-			} else if (p1.getTrait("connected earlobes").getTrait() == connectedEarlobes[0]) {
-				p1.addAllele(new Trait("connected earlobes", "dd"));
-			} else {
-				p1.addAllele(new Trait("connected earlobes", "rr"));
-			}
-		}
-		
-		if (p2.getTrait("cleft chin").getTrait() == null
-				|| p3.getTrait("cleft chin").getTrait() == null) {
-			if (p1.getTrait("cleft chin").getTrait() == cleftChin[0]) {
-				p1.addAllele(new Trait("cleft chin", "dd"));
-			} else {
-				p1.addAllele(new Trait("cleft chin", "rr"));
-			}
-		} else {
-			if (p1.getTrait("cleft chin").getTrait() == cleftChin[0]
-					&& (p2.getTrait("cleftChin").getTrait() == cleftChin[1] || p3
-							.getTrait("cleft chin").getTrait() == cleftChin[1])) {
-				p1.addAllele(new Trait("cleft chin", "dr"));
-			} else if (p1.getTrait("cleft chin").getTrait() == cleftChin[0]) {
-				p1.addAllele(new Trait("cleft chin", "dd"));
-			} else {
-				p1.addAllele(new Trait("cleft chin", "rr"));
+				if (p1.getTrait(traits[i]).getTrait().equals(temp[0])
+						&& (p2.getTrait(traits[i]).getTrait().equals(temp[1]) || p3
+								.getTrait(traits[i]).getTrait().equals(temp[1]))) {
+					p1.addAllele(new Trait(traits[i], "dr"));
+				} else if (p1.getTrait(traits[i]).getTrait().equals(temp[0])) {
+					p1.addAllele(new Trait(traits[i], "dd"));
+				} else {
+					p1.addAllele(new Trait(traits[i], "rr"));
+				}
 			}
 		}
 		return p1;
 	}
 
-	public Trait combineTraits(Trait t1, Trait t2) {
-		if (t1.getName().equals(t2.getName())) {
-			System.out.println("cannot compare");
-			return null;
+	public Person combineAlleles(String name, boolean male, int id, Person p1,
+			Person p2) {
+		Person child = new Person(name, male, id, p1, p2);
+		String[] punnett = new String[4];
+		// makes the 4 sections of the punnett square with either dd, dr, or rr
+		for (int i = 0; i < traits.length; i++) {
+			punnett[0] = p1.getAllele(traits[i]).getTrait().substring(0, 1)
+					+ p2.getAllele(traits[i]).getTrait().substring(0, 1);
+			punnett[1] = p1.getAllele(traits[i]).getTrait().substring(0, 1)
+					+ p2.getAllele(traits[i]).getTrait().substring(1);
+			punnett[2] = p1.getAllele(traits[i]).getTrait().substring(1)
+					+ p2.getAllele(traits[i]).getTrait().substring(0, 1);
+			punnett[3] = p1.getAllele(traits[i]).getTrait().substring(1)
+					+ p2.getAllele(traits[i]).getTrait().substring(1);
+			int temp = (int) Math.random() * 3;
+			child.addAllele(new Trait(traits[i], punnett[temp]));
+
+			if (punnett[temp].contains("d")) {
+				child.addTrait(new Trait(traits[i], getArray(traits[i])[0]));
+			} else {
+				// this is not true for hair and eye color because they have
+				// more than 2 options
+				child.addTrait(new Trait(traits[i], getArray(traits[i])[1]));
+			}
 		}
-		if (t1.getName().equals("hair color")) {
 
-		} else if (t1.getName().equals("eye color")) {
-
-		} else if (t1.getName().equals("widows peak")) {
-
-		} else if (t1.getName().equals("connected earlobes")) {
-
-		} else if (t1.getName().equals("cleft chin")) {
-
-		}
-		return null;
+		return child;
 	}
 }
