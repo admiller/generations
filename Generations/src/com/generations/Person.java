@@ -21,13 +21,13 @@ public class Person implements Serializable {
 	private ArrayList<Trait> traits;
 	private int id;
 
-	public Person(String name, boolean male, Person parent1, Person parent2) {
+	public Person(String name, boolean male, int id, Person parent1, Person parent2) {
 		this.name = name;
 		this.male = male;
 		this.parent1 = parent1;
 		this.parent2 = parent2;
 		traits = new ArrayList<Trait>();
-		id = -1;
+		this.id = id;
 	}
 
 	public void setName(String name) {

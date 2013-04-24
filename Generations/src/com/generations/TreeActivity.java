@@ -37,6 +37,19 @@ public class TreeActivity extends Activity {
 	
 	public void saveTree(View view) {
 		//TODO Kriti: Insert code to save the tree to the SQL database
+		Person user = MainActivity.getUser();
+		PersonOpenHelper db = new PersonOpenHelper(this);
+		//db.deleteDatabase(this);
+		
+		db = new PersonOpenHelper(this);
+		db.addPerson(user);
+		db.addPerson(user.getParent(1));
+		db.addPerson(user.getParent(2));
+		db.addPerson(user.getParent(1).getParent(1));
+		db.addPerson(user.getParent(1).getParent(2));
+		db.addPerson(user.getParent(2).getParent(1));
+		db.addPerson(user.getParent(2).getParent(2));
+		
 	}
 	
 	public void goBack(View view) {

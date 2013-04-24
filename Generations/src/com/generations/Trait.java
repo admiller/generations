@@ -43,7 +43,7 @@ public class Trait {
 	//TODO: Jarrett You can use this area for trait tracking as well
 	
 	public Person createChild(String name, boolean male, Person p1, Person p2){
-		Person child = new Person(name, male, p1, p2);
+		Person child = new Person(name, male, -1, p1, p2);
 		
 		//gets the alleles from parent 1 and parent 2
 		Person gp1p1 = p1.getParent(0);

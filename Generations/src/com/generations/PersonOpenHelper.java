@@ -8,13 +8,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class PersonOpenHelper extends SQLiteOpenHelper {
+	
+	private final String TAG = "SQLHelper";
 	
 	// Database version
 	private static final int DATABASE_VERSION = 1;
 	// Database name
-	private static final String DATABASE_NAME = "familiyTree";
+	private static final String DATABASE_NAME = "tree";
 	// Table name
 	private static final String TABLE_PEOPLE = "people";
 	// Column names
@@ -23,19 +26,23 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 	// Table creation 
 	private static final String TABLE_CREATE =
 			"CREATE TABLE " + TABLE_PEOPLE + "("
-					+ KEY_ID + " INTEGER PRIMARY KEY,"
-					+ KEY_NAME + " TEXT,"
-					+ ");";
+					+ KEY_ID + " INT PRIMARY KEY,"
+					+ KEY_NAME + " TEXT"
+					+ ")";
 	
 	public PersonOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+	
+	public void deleteDatabase(Context context) {
+		context.deleteDatabase(DATABASE_NAME);
+	}
 
 	// Creates the table 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		Log.d(TAG, TABLE_CREATE);
 		db.execSQL(TABLE_CREATE);
-		db.close();
 	}
 	
 	// Upgrades database
@@ -68,7 +75,7 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 		if(cursor != null) {
 			cursor.moveToFirst();
 		}
-		Person person = new Person(cursor.getString(1), true, null, null);
+		Person person = new Person(cursor.getString(1), true, id, null, null);
 		return person;
 	}
 	
@@ -82,9 +89,11 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
  
         // looping through all rows and adding to list
+        int i = 0;
         if (cursor.moveToFirst()) {
             do {
-                Person person = new Person(cursor.getString(1), true, null, null);
+                Person person = new Person(cursor.getString(1), true, i, null, null);
+                i++;
                 // Adding contact to list
                 personList.add(person);
             } while (cursor.moveToNext());
@@ -109,6 +118,13 @@ public class PersonOpenHelper extends SQLiteOpenHelper {
 	public void deletePerson(Person person) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.delete(TABLE_PEOPLE, KEY_ID + "=?", new String[] { String.valueOf(person.getId()) });
+		db.close();
+	}
+	
+	public void destroyTable() {
+		String destroy = "DROP TABLE " + TABLE_PEOPLE;
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL(destroy);
 		db.close();
 	}
 	
