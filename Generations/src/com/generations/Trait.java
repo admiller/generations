@@ -44,6 +44,7 @@ public class Trait {
 	public void setTrait(String trait) {
 		this.trait = trait;
 	}
+//<<<<<<< HEAD
 
 	// TODO: Jarrett You can use this area for trait tracking as well
 
@@ -51,6 +52,15 @@ public class Trait {
 		Person child = new Person(name, male, p1, p2);
 
 		// gets the alleles from parent 1 and parent 2
+//=======
+	
+	//TODO: Jarrett You can use this area for trait tracking as well
+	
+//	public Person createChild(String name, boolean male, Person p1, Person p2){
+//		Person child = new Person(name, male, -1, p1, p2);
+		
+		//gets the alleles from parent 1 and parent 2
+//>>>>>>> f9ec377eefb7789a64ab4f1c6533a60a2521b72d
 		Person gp1p1 = p1.getParent(0);
 		Person gp2p1 = p1.getParent(1);
 		p1 = getAlleles(p1, gp1p1, gp2p1);

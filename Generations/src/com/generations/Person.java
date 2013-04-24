@@ -19,18 +19,31 @@ public class Person implements Serializable {
 	private boolean male;
 	private String name;
 	private ArrayList<Trait> traits;
+<<<<<<< HEAD
 	private ArrayList<Trait> alleles;
+=======
+	private int id;
+>>>>>>> f9ec377eefb7789a64ab4f1c6533a60a2521b72d
 
-	public Person(String name, boolean male, Person parent1, Person parent2) {
+	public Person(String name, boolean male, int id, Person parent1, Person parent2) {
 		this.name = name;
 		this.male = male;
 		this.parent1 = parent1;
 		this.parent2 = parent2;
 		traits = new ArrayList<Trait>();
+		this.id = id;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public void setParent(int id, Person parent) {
